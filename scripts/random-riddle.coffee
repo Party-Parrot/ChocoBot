@@ -13,6 +13,8 @@ jsdom = require "jsdom"
 
 newRiddle = (res) ->
 
+  res.reply 'in new riddle'
+
   jsdom.env 'http://goodriddlesnow.com/riddles/random', [ 'http://code.jquery.com/jquery.js' ], (err, window) ->
 
     res.reply 'Looking for riddle'
