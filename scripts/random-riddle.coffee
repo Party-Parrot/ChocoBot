@@ -1,16 +1,18 @@
 jsdom = require "jsdom"
 
-newRiddle = jsdom.env 'http://goodriddlesnow.com/riddles/random', [ 'http://code.jquery.com/jquery.js' ], (err, window) ->
-  $ = window.$
-  riddle = $('body .riddle-question p').text()
-  answer = $('body .riddle-answer p:first').text()
+newRiddle = ->
 
-  if answer.trim.split(" ").length > 2 
-    newRiddle()
+  jsdom.env 'http://goodriddlesnow.com/riddles/random', [ 'http://code.jquery.com/jquery.js' ], (err, window) ->
+    $ = window.$
+    riddle = $('body .riddle-question p').text()
+    answer = $('body .riddle-answer p:first').text()
 
-  res.reply riddle
+    if answer.trim.split(" ").length > 2 
+      newRiddle()
 
-answer
+    res.reply riddle
+
+  answer
 
 module.exports = (robot) ->
   robot.hear /riddle me this[?]/i, (res) ->
