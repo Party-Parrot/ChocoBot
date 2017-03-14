@@ -1,21 +1,10 @@
-# Description:
-#   The master of conundrums itself, the riddlebot will stump you with only the most difficult riddles.
-#
-# Commands:
-#   riddle me this? - Gives the user a riddle.
-#   riddle me that? - Gives the answer to the last riddle given.
-#   riddle me done! [user's answer] - Determines whether the user's answer is correct or not.
-#
-# Author:
-#   me
-
 jsdom = require "jsdom"
 
 module.exports = (robot) ->
   robot.hear /riddle me this[?]/i, (res) ->
     jsdom.env 'http://www.riddles.nu/random', [ 'http://code.jquery.com/jquery.js' ], (err, window) ->
-      res.reply window
-      $ = window.$
+      $ = window.$("body")
+      res.reply($)
       global.question = $('blockquote:first p').text()
       global.answer = $('blockquote:first div div').html()
       return
