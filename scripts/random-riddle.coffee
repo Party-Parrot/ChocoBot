@@ -5,10 +5,12 @@ newRiddle = jsdom.env 'http://goodriddlesnow.com/riddles/random', [ 'http://code
   riddle = $('body .riddle-question p').text()
   answer = $('body .riddle-answer p:first').text()
 
-  if answer.length > 2 newRiddle()
+  if answer.length > 2 
+    newRiddle
 
   robot.brain.set 'answer', answer
   res.reply riddle
+return
 
 module.exports = (robot) ->
   robot.hear /riddle me this[?]/i, (res) ->
