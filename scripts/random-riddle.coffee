@@ -3,7 +3,7 @@ jsdom = require "jsdom"
 newRiddle = ->
 
   jsdom.env 'http://goodriddlesnow.com/riddles/random', [ 'http://code.jquery.com/jquery.js' ], (err, window) ->
-  
+
     res.reply 'Looking for riddle'
     $ = window.$
     riddle = $('body .riddle-question p').text()
@@ -21,7 +21,7 @@ return
 
 module.exports = (robot) ->
   robot.hear /riddle me this[?]/i, (res) ->
-      robot.brain.set 'answer', newRiddle()
+    newRiddle()
     return
   robot.hear /riddle me that[?]/i, (res) ->
     correctAnswer = robot.brain.get('answer')
