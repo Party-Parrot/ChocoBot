@@ -1,40 +1,13 @@
-# Description:
-#   The master of conundrums itself, the riddlebot will stump you with only the most difficult riddles.
-#
-# Commands:
-#   riddle me this? - Gives the user a riddle.
-#   riddle me that? - Gives the answer to the last riddle given.
-#   riddle me done! [user's answer] - Determines whether the user's answer is correct or not.
-#
-# Author:
-#   me
-
 jsdom = require "jsdom"
-
-newRiddle = (res) ->
-
-  res.reply 'in new riddle'
-
-  jsdom.env 'http://goodriddlesnow.com/riddles/random', [ 'http://code.jquery.com/jquery.js' ], (err, window) ->
-
-    res.reply 'Looking for riddle'
-    $ = window.$
-    riddle = $('body .riddle-question p').text()
-    answer = $('body .riddle-answer p:first').text()
-
-    if answer.trim.split(" ").length > 2 
-      res.reply 'Riddle answer too long, retrying...'
-      newRiddle()
-
-    res.reply riddle
-
-  answer
-
-return
 
 module.exports = (robot) ->
   robot.hear /riddle me this[?]/i, (res) ->
-    newRiddle(res)
+    jsdom.env 'http://goodriddlesnow.com/riddles/random', [ 'http://code.jquery.com/jquery.js' ], (err, window) ->
+      $ = window.$
+      riddle = $('body .riddle-question p').text()
+      answer = $('body .riddle-answer p:first').text()
+      robot.brain.set 'answer', answer
+      res.reply riddle
     return
   robot.hear /riddle me that[?]/i, (res) ->
     correctAnswer = robot.brain.get('answer')
