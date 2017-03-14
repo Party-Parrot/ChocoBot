@@ -3,11 +3,14 @@ jsdom = require "jsdom"
 newRiddle = ->
 
   jsdom.env 'http://goodriddlesnow.com/riddles/random', [ 'http://code.jquery.com/jquery.js' ], (err, window) ->
+  
+    res.reply 'Looking for riddle'
     $ = window.$
     riddle = $('body .riddle-question p').text()
     answer = $('body .riddle-answer p:first').text()
 
     if answer.trim.split(" ").length > 2 
+      res.reply 'Riddle answer too long, retrying...'
       newRiddle()
 
     res.reply riddle
