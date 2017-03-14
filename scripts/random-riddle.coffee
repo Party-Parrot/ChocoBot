@@ -3,10 +3,9 @@ jsdom = require "jsdom"
 module.exports = (robot) ->
   robot.hear /riddle me this[?]/i, (res) ->
     jsdom.env 'http://www.riddles.nu/random', [ 'http://code.jquery.com/jquery.js' ], (err, window) ->
-      $ = window.$("body")
-      res.reply($)
-      global.question = $('blockquote:first p').text()
-      global.answer = $('blockquote:first div div').html()
+      $ = window.jQuery
+      global.question = $(this).find('blockquote:first p').text()
+      global.answer =  $(this).find('blockquote:first div div').html()
       return
     robot.brain.set 'answer', global.answer
     res.reply 'It\'s time to get smart! ' + global.riddle
