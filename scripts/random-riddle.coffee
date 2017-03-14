@@ -5,7 +5,7 @@ module.exports = (robot) ->
     jsdom.env 'http://goodriddlesnow.com/riddles/random', [ 'http://code.jquery.com/jquery.js' ], (err, window) ->
       $ = window.$
       riddle = $('body .riddle-question p').text()
-      answer =  $('body .riddle-answer p').text()
+      answer =  $('body .riddle-answer p:first').text()
       robot.brain.set 'answer', answer
       res.reply riddle
     return
