@@ -6,10 +6,11 @@ newRiddle = jsdom.env 'http://goodriddlesnow.com/riddles/random', [ 'http://code
   answer = $('body .riddle-answer p:first').text()
 
   if answer.trim.split(" ").length > 2 
-    newRiddle
+    newRiddle()
 
   res.reply riddle
-return answer
+
+answer
 
 module.exports = (robot) ->
   robot.hear /riddle me this[?]/i, (res) ->
