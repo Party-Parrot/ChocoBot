@@ -15,13 +15,11 @@ module.exports = (robot) ->
   robot.hear /riddle me this[?]/i, (res) ->
     jsdom.env 'http://www.riddles.nu/random', [ 'http://code.jquery.com/jquery.js' ], (err, window) ->
       $ = window.$
-      question = $('blockquote:first p').text()
-      answer = $('blockquote:first div div').html()
+      GLOBAL.question = $('blockquote:first p').text()
+      GLOBAL.answer = $('blockquote:first div div').html()
       return
-    riddle = question
-    answer = answer
-    robot.brain.set 'answer', answer
-    res.reply 'It\'s time to get smart! ' + riddle
+    robot.brain.set 'answer', GLOBAL.answer
+    res.reply 'It\'s time to get smart! ' + GLOBAL.riddle
     return
   robot.hear /riddle me that[?]/i, (res) ->
     correctAnswer = robot.brain.get('answer')
