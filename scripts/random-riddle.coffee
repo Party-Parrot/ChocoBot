@@ -7,11 +7,11 @@ module.exports = (robot) ->
       riddle = $('body .riddle-question p').text()
       answer =  $('body .riddle-answer p').text()
       robot.brain.set 'answer', answer
-      res.reply 'It\'s time to get smart! ' + riddle
+      res.reply riddle
     return
   robot.hear /riddle me that[?]/i, (res) ->
     correctAnswer = robot.brain.get('answer')
-    res.reply 'Giving up already? Well I should have seen that coming. Here is the answer to that riddle: ' + correctAnswer + '.'
+    res.reply ' + correctAnswer + '.'
     return
   robot.hear /riddle me done[!]\s*(.*)/i, (res) ->
     userAnswer = res.match[1].toLowerCase()
