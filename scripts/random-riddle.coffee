@@ -6,9 +6,8 @@ module.exports = (robot) ->
       $ = window.$
       riddle = $('body blockquote:first p').text()
       answer =  $('body blockquote:first div div').html()
-      return
-    robot.brain.set 'answer', answer
-    res.reply 'It\'s time to get smart! ' + riddle
+      robot.brain.set 'answer', answer
+      res.reply 'It\'s time to get smart! ' + riddle
     return
   robot.hear /riddle me that[?]/i, (res) ->
     correctAnswer = robot.brain.get('answer')
