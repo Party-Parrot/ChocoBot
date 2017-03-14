@@ -14,7 +14,7 @@ answer
 
 module.exports = (robot) ->
   robot.hear /riddle me this[?]/i, (res) ->
-      robot.brain.set 'answer', newRiddle
+      robot.brain.set 'answer', newRiddle()
     return
   robot.hear /riddle me that[?]/i, (res) ->
     correctAnswer = robot.brain.get('answer')
