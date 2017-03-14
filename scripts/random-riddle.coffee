@@ -5,13 +5,13 @@ module.exports = (robot) ->
     jsdom.env 'http://goodriddlesnow.com/riddles/random', [ 'http://code.jquery.com/jquery.js' ], (err, window) ->
       $ = window.$
       riddle = $('body .riddle-question p').text()
-      answer =  $('body .riddle-answer p:first').text()
+      answer = $('body .riddle-answer p:first').text()
       robot.brain.set 'answer', answer
       res.reply riddle
     return
   robot.hear /riddle me that[?]/i, (res) ->
     correctAnswer = robot.brain.get('answer')
-    res.reply ' + correctAnswer + '.'
+    res.reply correctAnswer
     return
   robot.hear /riddle me done[!]\s*(.*)/i, (res) ->
     userAnswer = res.match[1].toLowerCase()
