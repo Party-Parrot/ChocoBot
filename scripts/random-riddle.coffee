@@ -4,13 +4,11 @@ module.exports = (robot) ->
   robot.hear /riddle me this[?]/i, (res) ->
     jsdom.env 'http://www.riddles.nu/random', [ 'http://code.jquery.com/jquery.js' ], (err, window) ->
       $ = window.$
-      global.riddle = $('body blockquote:first p').text()
-      res.reply($('body blockquote:first p').text())
-      global.answer =  $('body blockquote:first div div').html()
-      res.reply($('body blockquote:first div div').html())
+      riddle = $('body blockquote:first p').text()
+      answer =  $('body blockquote:first div div').html()
       return
-    robot.brain.set 'answer', global.answer
-    res.reply 'It\'s time to get smart! ' + global.riddle
+    robot.brain.set 'answer', answer
+    res.reply 'It\'s time to get smart! ' + riddle
     return
   robot.hear /riddle me that[?]/i, (res) ->
     correctAnswer = robot.brain.get('answer')
