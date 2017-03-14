@@ -14,6 +14,8 @@ newRiddle = ->
 
   answer
 
+return
+
 module.exports = (robot) ->
   robot.hear /riddle me this[?]/i, (res) ->
       robot.brain.set 'answer', newRiddle()
