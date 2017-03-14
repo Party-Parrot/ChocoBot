@@ -2,10 +2,10 @@ jsdom = require "jsdom"
 
 module.exports = (robot) ->
   robot.hear /riddle me this[?]/i, (res) ->
-    jsdom.env 'http://www.riddles.nu/random', [ 'http://code.jquery.com/jquery.js' ], (err, window) ->
+    jsdom.env 'http://goodriddlesnow.com/riddles/random', [ 'http://code.jquery.com/jquery.js' ], (err, window) ->
       $ = window.$
-      riddle = $('body blockquote:first p').text()
-      answer =  $('body blockquote:first div div').html()
+      riddle = $('body .riddle-question p').text()
+      answer =  $('body .riddle-answer p').text()
       robot.brain.set 'answer', answer
       res.reply 'It\'s time to get smart! ' + riddle
     return
